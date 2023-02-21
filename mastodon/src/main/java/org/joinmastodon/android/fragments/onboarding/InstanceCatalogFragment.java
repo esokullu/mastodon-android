@@ -102,6 +102,19 @@ abstract class InstanceCatalogFragment extends BaseRecyclerFragment<CatalogInsta
 		return true;
 	}
 
+	protected boolean onForceSearch(){
+		currentSearchQuery=searchEdit.getText().toString().toLowerCase().trim();
+		searchEdit.removeCallbacks(searchDebouncer);
+		Instance instance=instancesCache.get(normalizeInstanceDomain(currentSearchQuery));
+		if(instance==null){
+			showProgressDialog();
+			loadInstanceInfo(currentSearchQuery, false);
+		}else{
+			proceedWithAuthOrSignup(instance);
+		}
+		return true;
+	}
+
 	protected void onSearchChangedDebounced(){
 		currentSearchQuery=searchEdit.getText().toString().toLowerCase().trim();
 		updateFilteredList();

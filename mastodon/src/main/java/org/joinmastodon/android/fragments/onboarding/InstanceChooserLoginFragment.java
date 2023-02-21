@@ -54,6 +54,7 @@ public class InstanceChooserLoginFragment extends InstanceCatalogFragment{
 		if(!loadedAutocomplete){
 			loadAutocompleteServers();
 		}
+
 	}
 
 	@Override
@@ -119,6 +120,12 @@ public class InstanceChooserLoginFragment extends InstanceCatalogFragment{
 		headerView=getActivity().getLayoutInflater().inflate(R.layout.header_onboarding_login, list, false);
 		clearBtn=headerView.findViewById(R.id.search_clear);
 		searchEdit=headerView.findViewById(R.id.search_edit);
+
+		searchEdit.setText("mastoturk.org");
+		searchEdit.setEnabled(false);
+		this.onForceSearch();
+
+
 		searchEdit.setOnEditorActionListener(this::onSearchEnterPressed);
 		searchEdit.addTextChangedListener(new TextWatcher(){
 			@Override
