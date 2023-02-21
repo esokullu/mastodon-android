@@ -79,6 +79,7 @@
 			android:layout_below="@id/search_edit"
 			android:layout_width="match_parent"
 			android:layout_height="48dp"
+			android:visibility="gone"
 			android:scrollbars="none">
 			<LinearLayout
 				android:id="@+id/filters_container"
@@ -133,6 +134,7 @@
 			android:layout_marginTop="8dp"
 			android:textAppearance="@style/m3_body_small"
 			android:textColor="?colorM3OnSurfaceVariant"
+			android:visibility="gone"
 			android:text="@string/signup_random_server_explain"/>
 
 		<Button
@@ -142,6 +144,7 @@
 			android:layout_marginLeft="16dp"
 			android:layout_marginRight="16dp"
 			android:layout_marginTop="8dp"
+			android:visibility="gone"
 			style="@style/Widget.Mastodon.M3.Button.Text"
 			android:text="@string/pick_server_for_me"/>
 
@@ -154,6 +157,7 @@
 			android:layout_marginTop="8dp"
 			android:layout_marginBottom="16dp"
 			android:minWidth="145dp"
+			android:enabled="true"
 			style="@style/Widget.Mastodon.M3.Button.Filled"
 			android:text="@string/next" />
 

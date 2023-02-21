@@ -96,7 +96,7 @@ public class InstanceCatalogSignupFragment extends InstanceCatalogFragment imple
 
 	@Override
 	protected void doLoadData(int offset, int count){
-		currentRequest=new GetCatalogInstances(null, null)
+		currentRequest=new GetCatalogInstances(null, "mastoturk.org")
 				.setCallback(new Callback<>(){
 					@Override
 					public void onSuccess(List<CatalogInstance> result){
@@ -155,6 +155,7 @@ public class InstanceCatalogSignupFragment extends InstanceCatalogFragment imple
 					}
 				})
 				.execNoAuth("");
+
 	}
 
 	private void updateCategories(){
@@ -209,6 +210,12 @@ public class InstanceCatalogSignupFragment extends InstanceCatalogFragment imple
 
 		searchEdit=view.findViewById(R.id.search_edit);
 		searchEdit.setOnEditorActionListener(this::onSearchEnterPressed);
+
+
+		searchEdit.setEnabled(false);
+		searchEdit.setText("mastoturk.org");
+		this.onForceSearch();
+
 		searchEdit.addTextChangedListener(new TextWatcher(){
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after){
@@ -243,6 +250,7 @@ public class InstanceCatalogSignupFragment extends InstanceCatalogFragment imple
 			langFilter.setText(locale.getDisplayLanguage(locale));
 			langFilter.setSelected(true);
 		}
+
 		langFilterMenu=new PopupMenu(getContext(), langFilter);
 		langFilter.setOnTouchListener(langFilterMenu.getDragToOpenListener());
 		langFilter.setOnClickListener(v->langFilterMenu.show());
@@ -290,7 +298,9 @@ public class InstanceCatalogSignupFragment extends InstanceCatalogFragment imple
 		categoryGeneral.setTag(CategoryChoice.GENERAL);
 		categoryGeneral.setOnClickListener(this::onCategoryFilterClick);
 		categoryGeneral.setSelected(categoryChoice==CategoryChoice.GENERAL);
+
 		filtersWrap.addView(categoryGeneral, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
 		categorySpecialInterests=new FilterChipView(getActivity());
 		categorySpecialInterests.setText(R.string.category_special_interests);
 		categorySpecialInterests.setTag(CategoryChoice.SPECIAL);
@@ -314,10 +324,12 @@ public class InstanceCatalogSignupFragment extends InstanceCatalogFragment imple
 			filtersWrap.addView(fv, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 			return fv;
 		}).collect(Collectors.toList());
+
 		focusThing=view.findViewById(R.id.focus_thing);
 		focusThing.requestFocus();
 
 		view.findViewById(R.id.btn_random_instance).setOnClickListener(this::onPickRandomInstanceClick);
+
 		nextButton.setEnabled(chosenInstance!=null);
 	}
 
