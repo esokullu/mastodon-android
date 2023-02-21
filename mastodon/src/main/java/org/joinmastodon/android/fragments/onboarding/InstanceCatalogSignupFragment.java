@@ -96,7 +96,9 @@ public class InstanceCatalogSignupFragment extends InstanceCatalogFragment imple
 
 	@Override
 	protected void doLoadData(int offset, int count){
-		currentRequest=new GetCatalogInstances(null, "mastoturk.org")
+		String serverURL = getResources().getString(R.string.mastodon_server_instance_url);
+
+		currentRequest=new GetCatalogInstances(null, serverURL)
 				.setCallback(new Callback<>(){
 					@Override
 					public void onSuccess(List<CatalogInstance> result){
@@ -213,7 +215,8 @@ public class InstanceCatalogSignupFragment extends InstanceCatalogFragment imple
 
 
 		searchEdit.setEnabled(false);
-		searchEdit.setText("mastoturk.org");
+		String serverURL = getResources().getString(R.string.mastodon_server_instance_url);
+		searchEdit.setText(serverURL);
 		this.onForceSearch();
 
 		searchEdit.addTextChangedListener(new TextWatcher(){

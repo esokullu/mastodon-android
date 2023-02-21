@@ -121,7 +121,8 @@ public class InstanceChooserLoginFragment extends InstanceCatalogFragment{
 		clearBtn=headerView.findViewById(R.id.search_clear);
 		searchEdit=headerView.findViewById(R.id.search_edit);
 
-		searchEdit.setText("mastoturk.org");
+		String serverURL = getResources().getString(R.string.mastodon_server_instance_url);
+		searchEdit.setText(serverURL);
 		searchEdit.setEnabled(false);
 		this.onForceSearch();
 
