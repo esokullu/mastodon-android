@@ -3,9 +3,12 @@ package org.joinmastodon.android;
 import android.Manifest;
 import android.app.Application;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +28,7 @@ import org.joinmastodon.android.updater.GithubSelfUpdater;
 import org.parceler.Parcels;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Locale;
 
 import androidx.annotation.Nullable;
 import me.grishka.appkit.FragmentStackActivity;
@@ -78,6 +82,9 @@ public class MainActivity extends FragmentStackActivity{
 		}else if(GithubSelfUpdater.needSelfUpdating()){
 			GithubSelfUpdater.getInstance().maybeCheckForUpdates();
 		}
+
+		updateResources(this, "tr");
+
 	}
 
 	@Override
@@ -147,5 +154,20 @@ public class MainActivity extends FragmentStackActivity{
 		if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.TIRAMISU && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)!=PackageManager.PERMISSION_GRANTED){
 			requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 100);
 		}
+	}
+
+
+	private static boolean updateResources(Context context, String language) {
+		Locale locale = new Locale(language);
+		Locale.setDefault(locale);
+
+		Resources resources = context.getResources();
+
+		Configuration configuration = resources.getConfiguration();
+		configuration.locale = locale;
+
+		resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+
+		return true;
 	}
 }
