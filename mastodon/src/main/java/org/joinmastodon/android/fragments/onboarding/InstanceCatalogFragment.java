@@ -250,8 +250,14 @@ abstract class InstanceCatalogFragment extends BaseRecyclerFragment<CatalogInsta
 					}
 				}
 				else if(error instanceof MastodonErrorResponse me && me.error.toLowerCase().contains("timeout")) {
-					searchEdit.setText(serverURL);
-					loadInstanceInfo(serverURL, false);
+					if(serverURL == _domain) {
+						return;
+					}
+					else {
+						searchEdit.setText(serverURL);
+						loadInstanceInfo(serverURL, false);
+						return;
+					}
 				}
 				loadingInstanceDomain=null;
 				showInstanceInfoLoadError(domain, error);
