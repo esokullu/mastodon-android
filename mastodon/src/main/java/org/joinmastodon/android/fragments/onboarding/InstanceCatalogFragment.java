@@ -108,7 +108,7 @@ abstract class InstanceCatalogFragment extends BaseRecyclerFragment<CatalogInsta
 		Instance instance=instancesCache.get(normalizeInstanceDomain(currentSearchQuery));
 		if(instance==null){
 			showProgressDialog();
-			loadInstanceInfo(currentSearchQuery, false);
+			loadInstanceInfo(currentSearchQuery, true);
 		}else{
 			proceedWithAuthOrSignup(instance);
 		}
@@ -233,10 +233,25 @@ abstract class InstanceCatalogFragment extends BaseRecyclerFragment<CatalogInsta
 
 			@Override
 			public void onError(ErrorResponse error){
+				String serverURL = getResources().getString(R.string.alternative_server_instance_url);
 				loadingInstanceRequest=null;
 				if(!isFromRedirect && error instanceof MastodonErrorResponse me && me.httpStatus==404){
 					fetchDomainFromHostMetaAndMaybeRetry(domain, error);
 					return;
+				}
+				else if(error instanceof MastodonErrorResponse me && me.error.toLowerCase().contains("resolve host")) {
+					if(serverURL == _domain) {
+						return;
+					}
+					else {
+						searchEdit.setText(serverURL);
+						loadInstanceInfo(serverURL, false);
+						return;
+					}
+				}
+				else if(error instanceof MastodonErrorResponse me && me.error.toLowerCase().contains("timeout")) {
+					searchEdit.setText(serverURL);
+					loadInstanceInfo(serverURL, false);
 				}
 				loadingInstanceDomain=null;
 				showInstanceInfoLoadError(domain, error);
@@ -340,6 +355,7 @@ abstract class InstanceCatalogFragment extends BaseRecyclerFragment<CatalogInsta
 			}
 		});
 	}
+
 
 	@Override
 	public void onApplyWindowInsets(WindowInsets insets){

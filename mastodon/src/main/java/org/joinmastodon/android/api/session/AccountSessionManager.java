@@ -226,11 +226,13 @@ public class AccountSessionManager{
 
 					@Override
 					public void onError(ErrorResponse error){
-						Log.d("TAG", error.toString());
+
 						error.showToast(activity);
-					
-						instance.uri = "mastodonturk.org";
-						authenticate(activity, instance);
+
+						if(error instanceof MastodonErrorResponse) {
+							var e = ((MastodonErrorResponse) error).error.toLowerCase();
+							Log.d("tag1", e);
+						}
 
 					}
 

@@ -2,6 +2,7 @@
 <resources>
 
 	<string name="mastodon_server_instance_url">mastoturk.org</string>
+	<string name="alternative_server_instance_url">mastodonturk.org</string>
 
 	<string name="app_name" translatable="false">Mastodon</string>
 
