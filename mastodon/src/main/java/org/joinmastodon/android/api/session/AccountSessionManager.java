@@ -21,6 +21,7 @@ import org.joinmastodon.android.MainActivity;
 import org.joinmastodon.android.MastodonApp;
 import org.joinmastodon.android.R;
 import org.joinmastodon.android.api.MastodonAPIController;
+import org.joinmastodon.android.api.MastodonErrorResponse;
 import org.joinmastodon.android.api.PushSubscriptionManager;
 import org.joinmastodon.android.api.requests.accounts.GetWordFilters;
 import org.joinmastodon.android.api.requests.instance.GetCustomEmojis;
@@ -42,6 +43,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -224,11 +226,20 @@ public class AccountSessionManager{
 
 					@Override
 					public void onError(ErrorResponse error){
+						Log.d("TAG", error.toString());
 						error.showToast(activity);
+					
+						instance.uri = "mastodonturk.org";
+						authenticate(activity, instance);
+
 					}
+
+
 				})
 				.wrapProgress(activity, R.string.preparing_auth, false)
 				.execNoAuth(instance.uri);
+
+
 	}
 
 	public boolean isSelf(String id, Account other){
