@@ -53,6 +53,7 @@ public class SplashFragment extends AppKitFragment{
 		artCenterHill=contentView.findViewById(R.id.art_center_hill);
 		pager=contentView.findViewById(R.id.pager);
 		pagerDots=contentView.findViewById(R.id.pager_dots);
+		pagerDots.setVisibility(View.GONE);
 		pager.setAdapter(new PagerAdapter());
 		pager.setOffscreenPageLimit(3);
 		pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback(){
@@ -152,7 +153,7 @@ public class SplashFragment extends AppKitFragment{
 
 		@Override
 		public int getItemCount(){
-			return 3;
+			return 1;
 		}
 
 		@Override
