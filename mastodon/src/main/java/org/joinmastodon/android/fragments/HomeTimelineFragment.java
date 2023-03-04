@@ -331,7 +331,8 @@ public class HomeTimelineFragment extends StatusListFragment{
 	private void updateToolbarLogo(){
 		toolbarLogo=new ImageView(getActivity());
 		toolbarLogo.setScaleType(ImageView.ScaleType.CENTER);
-		toolbarLogo.setImageResource(R.drawable.logo);
+		//toolbarLogo.setImageResource(R.drawable.logo);
+		toolbarLogo.setImageResource(R.drawable.mastoturklogo);
 		toolbarLogo.setImageTintList(ColorStateList.valueOf(UiUtils.getThemeColor(getActivity(), android.R.attr.textColorPrimary)));
 
 		toolbarShowNewPostsBtn=new Button(getActivity());
