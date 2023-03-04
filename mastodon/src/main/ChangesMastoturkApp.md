@@ -1,15 +1,16 @@
 # Changes for MastoTurk
 
-
 ### - Wed 1 Mar 2023
+
 Spash Screen:
 -Let’s remove the background
 -the swiper (one page is enough)
 -and change the text.
 -The text could be:
+
 - MastoTurk’e hoşgeldiniz!
 - MastoTurk olası sosyal medya sansürlerine karşı kurulmuş genel amaçlı bir Türkçe
-Twitter klonudur. Popüler Türk Twitter hesapları yansılanmaktadır. Siz de kendi hesabınızı oluşturabilirsiniz.
+  Twitter klonudur. Popüler Türk Twitter hesapları yansılanmaktadır. Siz de kendi hesabınızı oluşturabilirsiniz.
 
 Signup screen:
 changed text to turkish
@@ -20,3 +21,7 @@ changed text to turkish
 - changed app default lang to turkish
 - changed app logo icons
 - redirect to mastodonturk.org incase of timeout
+
+### - Saturday 4 Mar 2023
+
+-Changed title in homescreen from "Mastodon" to "Mastoturk" by changing the app name in strings.xml file
