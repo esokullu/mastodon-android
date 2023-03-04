@@ -4,7 +4,7 @@
 	<string name="mastodon_server_instance_url">mastoturk.org</string>
 	<string name="alternative_server_instance_url">mastodonturk.org</string>
 
-	<string name="app_name" translatable="false">Mastodon</string>
+	<string name="app_name" translatable="false">Matoturk</string>
 
 	<string name="get_started">Create account</string>
 	<string name="already_have_account">I already have an account</string>
